@@ -47,6 +47,13 @@ TODO======================= Cambios en el Tiempo ===============================
         ? git log --stat
 
                     -> el stat os detalla cuantos bits se cambio 
+
+        ? git log --all
+
+                    -> muestra los todos los cambios sin importar las ramas
+
+        ? git log --all --graph --decorate --oneline
+                    -> dettales graficos de todo lo que paso en git
 * SHOW
         ? git show historia.txt
                     -> nos muestra literalmente las diferencias del contenido que cambio en el archivo desde el ultimo commit que se hizo (actual)
@@ -56,7 +63,6 @@ TODO======================= Cambios en el Tiempo ===============================
                     -> Este comando va de la par con los 2 anteriores pero sirve para comparar 2 commits atraves del hash (De preferencia colocar la mas vieja y la mas nueva , en ese orden )  
 
 TODO======================= RAMAS / BRANCH =================================
-
 
 * CHECKOUT
 
@@ -109,6 +115,57 @@ TODO======================= RAMAS / BRANCH =================================
 
                     -> despues de solucionar conflictos se hace 
                         * git commit -am "Solucione conflictos"
+
+
+TODO======================= MANEJO DE RAMAS / PUlL REQUEST ==============================
+-> No necesariamente todas las ramas son enviadas , solo las necesarias el resto pueden ser ramas de referencia.
+
+        ? git show-branch --all
+                -> Nos muestra los ultimos commits de las ramas existentes y a su vez todos los commits de cada rama
+        ? gitk
+                -> nos abre un software que muestra mas graficamente todos los cambios tanto de ramas como commits y mas. (Evitar usar esto , la consola nos da mas rapidez en el flujo de trabajo)
+
+        ? git push origin rama
+                -> subir la rama al repo de github
+
+!  * - * - * - *   MASTER
+?          * - *  RAMA
+
+* * - * - * - * STAGING DEVELOP (rama de desarrollo)
+
+en el entorno profesional se trata de que la rama extra de master se conecte con la de STAGING debido a que alli se encuentra el servidor de desarrollo
+
+sin embargo no se trata de hacer un merge y ya , se debe de hacer un pull request que es lo formal
+
+? PULL REQUEST : 
+        -> Peticion al encargado del repositorio para subir unos cambios previa evaluacion
+
+        -> Se hace desde la interfas de GitHub y es mas intuitivo , y nos da la opcion de una vez los cambios sean aprobados , el encargado de hacer el commit del merge pueda eliminar la rama que fue absorvida
+
+TODO======================= TAGS / ALIAS  =================================
+-> Los alias para lineas de comando generales que se usan constantemente y son largas
+
+        ? alias arbolito="git log --all --graph --decorate --oneline"
+
+                -> con solo colocar "arbolito" y se ejecutara el comando
+
+-> Los tags llegan a ser una manera de "versionar" tu repositorio local y en GitHub (mas aqui)
+
+        ? git tag -a v0.1 -m "Resultado de las primeras clases" hashcommit
+                -> estamos marcando la version v0.1 a un commit
+
+                ? git tag -d dormido
+                        -> es para eliminar un tag , pero solo se borra en el repo local
+
+                ? git push origin :refs/tags/dormido
+                        -> sintaxis para eliminar la referencia visual de la pagina de github
+
+                ? git show-ref --tags
+                        -> para ver el hash del commit al cual este referenciado por un tag
+        ? git push origin --tags
+                -> enviamos los tags al repo de github que es sumamente importante en equipos de trabajo , se recomienda hacerlo siempre cuando borres alguno
+
+
 
 TODO======================= LLAVES / SSH =================================
 -> Jamas se configura todo esto dentro de un repositorio local 
